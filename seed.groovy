@@ -7,9 +7,8 @@ multibranchPipelineJob('CI-Jobs/Cart') {
     branchSources {
         git {
             id('123456789') // IMPORTANT: use a constant and unique identifier
-            remote('https://github.com/jenkinsci/job-dsl-plugin.git')
-            credentialsId('github-ci')
-            includes('JENKINS-*')
+            remote('https://github.com/ashwinreddy9966/cart.git')
+            credentialsId('GitHub-Cred')
         }
     }
     orphanedItemStrategy {
