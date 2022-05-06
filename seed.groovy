@@ -53,7 +53,7 @@ multibranchPipelineJob('CI-Jobs/Shipping') {
     branchSources {
         git {
             id('123456889') // IMPORTANT: use a constant and unique identifier
-            remote('https://github.com/ashwinreddy9966/shippint.git')
+            remote('https://github.com/ashwinreddy9966/shipping.git')
             credentialsId('GitHub-Cred')
         }
     }
