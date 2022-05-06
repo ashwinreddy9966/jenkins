@@ -37,7 +37,7 @@ multibranchPipelineJob('CI-Jobs/Catalogue') {
 multibranchPipelineJob('CI-Jobs/User') {
     branchSources {
         git {
-            id('123456889') // IMPORTANT: use a constant and unique identifier
+            id('123456819') // IMPORTANT: use a constant and unique identifier
             remote('https://github.com/ashwinreddy9966/user.git')
             credentialsId('GitHub-Cred')
         }
@@ -52,7 +52,7 @@ multibranchPipelineJob('CI-Jobs/User') {
 multibranchPipelineJob('CI-Jobs/Shipping') {
     branchSources {
         git {
-            id('123456889') // IMPORTANT: use a constant and unique identifier
+            id('1234568829') // IMPORTANT: use a constant and unique identifier
             remote('https://github.com/ashwinreddy9966/shipping.git')
             credentialsId('GitHub-Cred')
         }
@@ -67,8 +67,23 @@ multibranchPipelineJob('CI-Jobs/Shipping') {
 multibranchPipelineJob('CI-Jobs/Frontend') {
     branchSources {
         git {
-            id('123456889') // IMPORTANT: use a constant and unique identifier
+            id('123456839') // IMPORTANT: use a constant and unique identifier
             remote('https://github.com/ashwinreddy9966/frontend.git')
+            credentialsId('GitHub-Cred')
+        }
+    }
+    orphanedItemStrategy {
+        discardOldItems {
+            numToKeep(20)
+        }
+    }
+}
+
+multibranchPipelineJob('CI-Jobs/Payment') {
+    branchSources {
+        git {
+            id('123456849') // IMPORTANT: use a constant and unique identifier
+            remote('https://github.com/ashwinreddy9966/payment.git')
             credentialsId('GitHub-Cred')
         }
     }
