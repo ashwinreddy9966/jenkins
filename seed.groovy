@@ -93,3 +93,18 @@ multibranchPipelineJob('CI-Jobs/Payment') {
         }
     }
 }
+
+multibranchPipelineJob('CI-Jobs/Dispatch') {
+    branchSources {
+        git {
+            id('123456849') // IMPORTANT: use a constant and unique identifier
+            remote('https://github.com/ashwinreddy9966/payment.git')
+            credentialsId('GitHub-Cred')
+        }
+    }
+    orphanedItemStrategy {
+        discardOldItems {
+            numToKeep(20)
+        }
+    }
+}
