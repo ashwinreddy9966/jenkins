@@ -19,12 +19,13 @@ multibranchPipelineJob('CI-Jobs/Cart') {
     }
 }
 
-multibranchPipelineJob('CI-Jobs/Catalogue') {
+multibranchPipelineJob('CI-Jobs/catalogue') {
     branchSources {
-        git {
-            id('123456889') // IMPORTANT: use a constant and unique identifier
-            remote('https://github.com/ashwinreddy9966/catalogue.git')
-            credentialsId('GitHub-Cred')
+        github {
+            id('23232323') // IMPORTANT: use a constant and unique identifier
+            scanCredentialsId('GitHub-Cred')
+            repoOwner('ashwinreddy9966')
+            repository('catalogue')
         }
     }
     orphanedItemStrategy {
@@ -36,10 +37,11 @@ multibranchPipelineJob('CI-Jobs/Catalogue') {
 
 multibranchPipelineJob('CI-Jobs/User') {
     branchSources {
-        git {
-            id('123456819') // IMPORTANT: use a constant and unique identifier
-            remote('https://github.com/ashwinreddy9966/user.git')
-            credentialsId('GitHub-Cred')
+        github {
+            id('23232323') // IMPORTANT: use a constant and unique identifier
+            scanCredentialsId('GitHub-Cred')
+            repoOwner('ashwinreddy9966')
+            repository('user')
         }
     }
     orphanedItemStrategy {
@@ -49,12 +51,13 @@ multibranchPipelineJob('CI-Jobs/User') {
     }
 }
 
-multibranchPipelineJob('CI-Jobs/Shipping') {
+multibranchPipelineJob('CI-Jobs/shipping') {
     branchSources {
-        git {
-            id('1234568829') // IMPORTANT: use a constant and unique identifier
-            remote('https://github.com/ashwinreddy9966/shipping.git')
-            credentialsId('GitHub-Cred')
+        github {
+            id('23232323') // IMPORTANT: use a constant and unique identifier
+            scanCredentialsId('GitHub-Cred')
+            repoOwner('ashwinreddy9966')
+            repository('shipping')
         }
     }
     orphanedItemStrategy {
@@ -66,10 +69,11 @@ multibranchPipelineJob('CI-Jobs/Shipping') {
 
 multibranchPipelineJob('CI-Jobs/Frontend') {
     branchSources {
-        git {
-            id('123456839') // IMPORTANT: use a constant and unique identifier
-            remote('https://github.com/ashwinreddy9966/frontend.git')
-            credentialsId('GitHub-Cred')
+        github {
+            id('23232323') // IMPORTANT: use a constant and unique identifier
+            scanCredentialsId('GitHub-Cred')
+            repoOwner('ashwinreddy9966')
+            repository('frontend')
         }
     }
     orphanedItemStrategy {
@@ -81,10 +85,11 @@ multibranchPipelineJob('CI-Jobs/Frontend') {
 
 multibranchPipelineJob('CI-Jobs/Payment') {
     branchSources {
-        git {
-            id('123456849') // IMPORTANT: use a constant and unique identifier
-            remote('https://github.com/ashwinreddy9966/payment.git')
-            credentialsId('GitHub-Cred')
+        github {
+            id('23232323') // IMPORTANT: use a constant and unique identifier
+            scanCredentialsId('GitHub-Cred')
+            repoOwner('ashwinreddy9966')
+            repository('payment')
         }
     }
     orphanedItemStrategy {
@@ -96,10 +101,27 @@ multibranchPipelineJob('CI-Jobs/Payment') {
 
 multibranchPipelineJob('CI-Jobs/Dispatch') {
     branchSources {
-        git {
-            id('123456849') // IMPORTANT: use a constant and unique identifier
-            remote('https://github.com/ashwinreddy9966/payment.git')
-            credentialsId('GitHub-Cred')
+        github {
+            id('23232323') // IMPORTANT: use a constant and unique identifier
+            scanCredentialsId('GitHub-Cred')
+            repoOwner('ashwinreddy9966')
+            repository('dispatch')
+        }
+    }
+    orphanedItemStrategy {
+        discardOldItems {
+            numToKeep(20)
+        }
+    }
+}
+
+multibranchPipelineJob('Test-MB') {
+    branchSources {
+        github {
+            id('23232323') // IMPORTANT: use a constant and unique identifier
+            scanCredentialsId('GitHub-Cred')
+            repoOwner('ashwinreddy9966')
+            repository('jenkins')
         }
     }
     orphanedItemStrategy {
