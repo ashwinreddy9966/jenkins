@@ -12,13 +12,13 @@
 // // }
 
 node {
-   if (env.BRANCH_NAME == 'main') {
+   if (env.BRANCH_NAME == 'master') {
     stage('Test Stage') {
             echo 'I only execute on the main branch'
         }
      else {
          stage('Dev Stage') {
-            echo 'I only execute on the main branch'
+            echo 'I only execute on the master branch'
           }
      }
  }
