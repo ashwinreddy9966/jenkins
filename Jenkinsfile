@@ -19,4 +19,9 @@ node {
             echo 'I execute elsewhere'
         }
     }
+     stage('Test Stage') {
+         if (env.BRANCH_NAME == 'feature') {
+             echo 'I only execute on the feature branch'
+         }
+     }
 }
