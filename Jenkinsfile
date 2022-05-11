@@ -12,7 +12,7 @@
 // // }
 
 node {
-   if (env.BRANCH_NAME == 'master') {
+   if (env.BRANCH_NAME == 'main') {
     stage('Test Stage') {
             print 'I only execute on the main branch'
         }
