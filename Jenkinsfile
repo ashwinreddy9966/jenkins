@@ -1,12 +1,22 @@
+// node {
+// stage('Test'){
+//     print 'hello world'
+//     }
+// }
+//
+//
+// // node {
+// // stage('Test') {
+// //     print 'hello H'
+// //   }
+// // }
+
 node {
-stage('Test'){
-    print 'hello world'
+    stage('Test Stage') {
+        if (env.BRANCH_NAME == 'main') {
+            echo 'I only execute on the main branch'
+        } else {
+            echo 'I execute elsewhere'
+        }
     }
 }
-
-
-// node {
-// stage('Test') {
-//     print 'hello H'
-//   }
-// }
