@@ -12,13 +12,16 @@
 // // }
 
 node {
+   if (env.BRANCH_NAME == 'main') {
     stage('Test Stage') {
-        if (env.BRANCH_NAME == 'main') {
             echo 'I only execute on the main branch'
-        } else {
-            echo 'I execute elsewhere'
         }
-    }
+     else {
+         stage('Dev Stage') {
+            echo 'I only execute on the main branch'
+          }
+     }
+ }
     if (env.BRANCH_NAME == 'feature') {
      stage('Feature Stage') {
              echo 'I only execute on the feature branch'
