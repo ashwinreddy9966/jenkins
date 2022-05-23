@@ -14,7 +14,7 @@ pipeline {
 
         stage('Terraform-DB') {
             steps {
-            dir('EC2') { git branch: 'main', credentialsId: 'GitLabCred', url: 'https://gitlab.com/clouddevops-b47/terraform-ec2.git' }
+            dir('EC2') { git branch: 'main', credentialsId: 'GitLabCred', url:'https://github.com/ashwinreddy9966/terraform-ec2.git' }
                    sh "cp env-${ENV}/Terrafile . ; terrafile"
                    sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars"
                    sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
