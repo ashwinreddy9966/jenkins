@@ -12,7 +12,7 @@ pipeline {
                  }
            }
 
-        stage('Download the TF-EC2 Code') {
+        stage('Terraform-DB') {
             steps {
             dir('EC2') { git branch: 'main', credentialsId: 'GitLabCred', url: 'https://gitlab.com/clouddevops-b47/terraform-ec2.git' }
                    sh "cp env-${ENV}/Terrafile . ; terrafile"
