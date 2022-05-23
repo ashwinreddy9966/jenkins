@@ -2,7 +2,7 @@ pipeline {
     agent any
          parameters { choice(name: 'ENV', choices: ['dev', 'prod'], description: 'ENV') }
     stages {
-        stage('Terraform-VPC') {
+        stage('Creating-VPC') {
             steps {
             dir('MAVEN') { git branch: 'main', url: 'https://github.com/ashwinreddy9966/terraform-vpc.git' }
                     sh "ls -ltr"
@@ -13,7 +13,7 @@ pipeline {
                  }
            }
 
-        stage('Terraform-DB') {
+        stage('Creating-DB') {
             steps {
             dir('EC2') { git branch: 'main', url:'https://github.com/ashwinreddy9966/terraform-ec2.git' }
                    sh "ls -ltr"
