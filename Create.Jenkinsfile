@@ -16,7 +16,7 @@ pipeline {
 
         stage('Creating-DB') {
             steps {
-            dir('EC2') { git branch: 'main', url:'https://github.com/ashwinreddy9966/terraform-ec2.git'
+            dir('EC2') { git branch: 'main', url:'https://github.com/ashwinreddy9966/terraform-databases.git'
                    sh "ls -ltr"
                    sh "cp env-${ENV}/Terrafile . ; terrafile"
                    sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars"
