@@ -17,13 +17,13 @@ pipeline {
                             }
                         }
                    }
-                                    
+
 
                stage('Deleting-User') {
                    steps {
                        dir('USER') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/user.git'
                           sh '''
-                            cd terraform-immutable
+                            cd terraform-mutable
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/prod-backend.tfvars
                             terraform destroy -var-file=env-${ENV}/prod.tfvars -auto-approve
@@ -35,7 +35,7 @@ pipeline {
                    steps {
                        dir('Catalogue') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/catalogue.git'
                           sh '''
-                            cd terraform-immutable
+                            cd terraform-mutable
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/prod-backend.tfvars
                             terraform destroy -var-file=env-${ENV}/prod.tfvars -auto-approve
@@ -47,7 +47,7 @@ pipeline {
                 steps {
                     dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/payment.git'
                           sh '''
-                            cd terraform-immutable
+                            cd terraform-mutable
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/prod-backend.tfvars
                             terraform destroy -var-file=env-${ENV}/prod.tfvars -auto-approve
@@ -59,7 +59,7 @@ pipeline {
                 steps {
                     dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/cart.git'
                           sh '''
-                            cd terraform-immutable
+                            cd terraform-mutable
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/prod-backend.tfvars
                             terraform destroy -var-file=env-${ENV}/prod.tfvars -auto-approve
@@ -71,7 +71,7 @@ pipeline {
                 steps {
                     dir('SHIPPING') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/shipping.git'
                           sh '''
-                            cd terraform-immutable
+                            cd terraform-mutable
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/prod-backend.tfvars
                             terraform destroy -var-file=env-${ENV}/prod.tfvars -auto-approve
