@@ -39,5 +39,94 @@ pipeline {
                      }
                  }
             }
+         stage('Creating the Components') {
+             parallel {
+               stage('Creating-User') {
+                   steps {
+                       dir('USER') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/user.git'
+                          sh '''
+                            cd terraform-mutable
+                            export TF_VAR_APP_VERSION=2.0.1
+                            terrafile -f env-${ENV}/Terrafile
+                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform plan -var-file=env-${ENV}/${ENV}.tfvars
+                            terraform apply -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
+                          '''
+                            }
+                        }
+                   }
+               stage('Creating-Catalogue') {
+                   steps {
+                       dir('Catalogue') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/catalogue.git'
+                          sh '''
+                            cd terraform-mutable
+                            export TF_VAR_APP_VERSION=2.0.1
+                            terrafile -f env-${ENV}/Terrafile
+                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform plan -var-file=env-${ENV}/${ENV}.tfvars
+                            terraform apply -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
+                          '''
+                            }
+                        }
+                  }
+            stage('Creating-Payment') {
+                steps {
+                    dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/payment.git'
+                          sh '''
+                            cd terraform-mutable
+                            export TF_VAR_APP_VERSION=2.0.1
+                            terrafile -f env-${ENV}/Terrafile
+                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform plan -var-file=env-${ENV}/${ENV}.tfvars
+                            terraform apply -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
+                          '''
+                         }
+                     }
+                }
+            stage('Creating-Cart') {
+                steps {
+                    dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/cart.git'
+                          sh '''
+                            cd terraform-mutable
+                            export TF_VAR_APP_VERSION=2.0.1
+                            terrafile -f env-${ENV}/Terrafile
+                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform plan -var-file=env-${ENV}/${ENV}.tfvars
+                            terraform apply -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
+                          '''
+                         }
+                     }
+                }
+            stage('Creating-Shipping') {
+                steps {
+                    dir('SHIPPING') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/shipping.git'
+                          sh '''
+                            cd terraform-mutable
+                            export TF_VAR_APP_VERSION=2.0.1
+                            terrafile -f env-${ENV}/Terrafile
+                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform plan -var-file=env-${ENV}/${ENV}.tfvars
+                            terraform apply -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
+                          '''
+                         }
+                     }
+                }
+                   stage('Creating-Frontend') {
+                       steps {
+                           dir('FRONTEND') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/frontend.git'
+                              sh '''
+                                pwd ; ls -ltr
+                                cd ./terraform-mutable
+                                export TF_VAR_APP_VERSION=2.0.1
+                                terrafile -f env-${ENV}/Terrafile
+                                terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                                terraform plan -var-file=env-${ENV}/${ENV}.tfvars
+                                terraform apply -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
+                              '''
+                                }
+                            }
+                       }
+                 } // Closing of parallel stage
+              }  // Deletion state completed
+          }
     }
-}
