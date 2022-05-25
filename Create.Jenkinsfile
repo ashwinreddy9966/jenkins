@@ -1,6 +1,7 @@
 pipeline {
     agent any
     parameters { choice(name: 'ENV', choices: ['dev', 'prod'], description: 'ENV') }
+    parameters { choice(name: 'ENV', choices: ['dev', 'prod'], description: 'ENV') }
     stages {
         stage('Creating-VPC') {
             steps {
