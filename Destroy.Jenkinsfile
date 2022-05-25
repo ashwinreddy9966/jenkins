@@ -6,6 +6,7 @@ pipeline {
                 steps {
                     dir('CART') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/cart.git'
                             sh "ls -ltr"
+                            sh "cd terraform-mutable"
                             sh "cp env-${ENV}/Terrafile . ; terrafile"
                             sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars"
                             sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
