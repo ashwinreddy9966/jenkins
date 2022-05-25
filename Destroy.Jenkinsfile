@@ -11,8 +11,8 @@ pipeline {
                             pwd ; ls -ltr
                             cd ./terraform-mutable
                             terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/prod-backend.tfvars
-                            terraform destroy -var-file=env-${ENV}/prod.tfvars -auto-approve
+                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
                             }
                         }
@@ -25,8 +25,8 @@ pipeline {
                           sh '''
                             cd terraform-mutable
                             terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/prod-backend.tfvars
-                            terraform destroy -var-file=env-${ENV}/prod.tfvars -auto-approve
+                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
                             }
                         }
@@ -37,8 +37,8 @@ pipeline {
                           sh '''
                             cd terraform-mutable
                             terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/prod-backend.tfvars
-                            terraform destroy -var-file=env-${ENV}/prod.tfvars -auto-approve
+                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
                             }
                         }
@@ -49,8 +49,8 @@ pipeline {
                           sh '''
                             cd terraform-mutable
                             terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/prod-backend.tfvars
-                            terraform destroy -var-file=env-${ENV}/prod.tfvars -auto-approve
+                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
                          }
                      }
@@ -61,8 +61,8 @@ pipeline {
                           sh '''
                             cd terraform-mutable
                             terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/prod-backend.tfvars
-                            terraform destroy -var-file=env-${ENV}/prod.tfvars -auto-approve
+                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
                          }
                      }
@@ -73,8 +73,8 @@ pipeline {
                           sh '''
                             cd terraform-mutable
                             terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/prod-backend.tfvars
-                            terraform destroy -var-file=env-${ENV}/prod.tfvars -auto-approve
+                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
                          }
                      }
