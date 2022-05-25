@@ -13,7 +13,6 @@ pipeline {
                                 export TF_VAR_APP_VERSION=1.0.9
                                 terrafile -f env-${ENV}/Terrafile
                                 terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
-                                terraform plan -var-file=env-${ENV}/${ENV}.tfvars
                                 terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                               '''
                                 }
@@ -29,7 +28,6 @@ pipeline {
                             export TF_VAR_APP_VERSION=1.0.1
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
-                            terraform plan -var-file=env-${ENV}/${ENV}.tfvars
                             terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
                             }
@@ -43,7 +41,6 @@ pipeline {
                             export TF_VAR_APP_VERSION=1.1.2
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
-                            terraform plan -var-file=env-${ENV}/${ENV}.tfvars
                             terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
                             }
@@ -57,7 +54,6 @@ pipeline {
                             export TF_VAR_APP_VERSION=1.0.5
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
-                            terraform plan -var-file=env-${ENV}/${ENV}.tfvars
                             terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve || true
                           '''
                          }
@@ -71,7 +67,6 @@ pipeline {
                             export TF_VAR_APP_VERSION=1.0.5
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
-                            terraform plan -var-file=env-${ENV}/${ENV}.tfvars
                             terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve || true
                           '''
                          }
@@ -85,7 +80,6 @@ pipeline {
                             export TF_VAR_APP_VERSION=1.0.2
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
-                            terraform plan -var-file=env-${ENV}/${ENV}.tfvars
                             terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
                          }
@@ -101,7 +95,6 @@ pipeline {
                         sh "export TF_VAR_APP_VERSION=2.0.1"
                         sh "cp env-${ENV}/Terrafile . ; terrafile"
                         sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars"
-                        sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
                         sh "terraform destroy -auto-approve -var-file=env-${ENV}/${ENV}.tfvars"
                      }
                  }
@@ -114,7 +107,6 @@ pipeline {
                                     terrafile -f  env-${ENV}/Terrafile
                                     export TF_VAR_APP_VERSION=2.0.1
                                     terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
-                                    terraform plan -var-file=env-${ENV}/${ENV}.tfvars
                                     terraform destroy -auto-approve -var-file=env-${ENV}/${ENV}.tfvars
                         '''
                      }
@@ -128,7 +120,6 @@ pipeline {
                                     terrafile -f  env-${ENV}/Terrafile
                                     export TF_VAR_APP_VERSION=2.0.1
                                     terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
-                                    terraform plan -var-file=env-${ENV}/${ENV}.tfvars
                                     terraform destroy -auto-approve -var-file=env-${ENV}/${ENV}.tfvars
                         '''
                         }
