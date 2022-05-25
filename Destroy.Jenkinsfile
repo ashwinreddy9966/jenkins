@@ -14,6 +14,10 @@ pipeline {
                          }
                      }
                 }
+            stage('Deleting the Components') {
+            
+
+            }
 
         stage('Deleting-DB') {
             steps {
