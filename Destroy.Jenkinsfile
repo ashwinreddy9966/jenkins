@@ -10,7 +10,7 @@ pipeline {
                               sh '''
                                 pwd ; ls -ltr
                                 cd ./terraform-mutable
-                                export TF_VAR_APP_VERSION=2.0.1
+                                export TF_VAR_APP_VERSION=1.0.9
                                 terrafile -f env-${ENV}/Terrafile
                                 terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
                                 terraform plan -var-file=env-${ENV}/${ENV}.tfvars
@@ -26,7 +26,7 @@ pipeline {
                        dir('USER') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/user.git'
                           sh '''
                             cd terraform-mutable
-                            export TF_VAR_APP_VERSION=2.0.1
+                            export TF_VAR_APP_VERSION=1.0.1
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
                             terraform plan -var-file=env-${ENV}/${ENV}.tfvars
@@ -40,7 +40,7 @@ pipeline {
                        dir('Catalogue') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/catalogue.git'
                           sh '''
                             cd terraform-mutable
-                            export TF_VAR_APP_VERSION=2.0.1
+                            export TF_VAR_APP_VERSION=1.1.2
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
                             terraform plan -var-file=env-${ENV}/${ENV}.tfvars
