@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters { choice(name: 'ENV', choices: ['dev', 'prod'], description: 'ENV') }
-    parameters { choice(name: 'ENV', choices: ['dev', 'prod'], description: 'ENV') }
+    parameters { string(name: 'APP_VERSION',description: 'Choose App Version To Deploy', name: APP_VERSION) }
     stages {
         stage('Creating-VPC') {
             steps {
