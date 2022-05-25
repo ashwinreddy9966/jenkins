@@ -4,21 +4,21 @@ pipeline {
     stages {
          stage('Deleting the Components') {
              parallel {
-               stage('Deleting-Frontend') {
-                   steps {
-                       dir('FRONTEND') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/frontend.git'
-                          sh '''
-                            pwd ; ls -ltr
-                            cd ./terraform-mutable
-                            export TF_VAR_APP_VERSION=2.0.1
-                            terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
-                            terraform plan -var-file=env-${ENV}/${ENV}.tfvars
-                            terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
-                          '''
+                   stage('Deleting-Frontend') {
+                       steps {
+                           dir('FRONTEND') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/frontend.git'
+                              sh '''
+                                pwd ; ls -ltr
+                                cd ./terraform-mutable
+                                export TF_VAR_APP_VERSION=2.0.1
+                                terrafile -f env-${ENV}/Terrafile
+                                terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                                terraform plan -var-file=env-${ENV}/${ENV}.tfvars
+                                terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
+                              '''
+                                }
                             }
-                        }
-                   }
+                       }
 
 
                stage('Deleting-User') {
@@ -129,8 +129,9 @@ pipeline {
                        sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars"
                        sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
                        sh "terraform destroy -auto-approve -var-file=env-${ENV}/${ENV}.tfvars"
+                        }
                     }
-               }
+                 }
+             }
         }
     }
-}
