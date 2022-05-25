@@ -9,7 +9,7 @@ pipeline {
                        dir('FRONTEND') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/frontend.git'
                           sh '''
                             pwd ; ls -ltr
-                            cd ./terraform-immutable
+                            cd ./terraform-mutable
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/prod-backend.tfvars
                             terraform destroy -var-file=env-${ENV}/prod.tfvars -auto-approve
@@ -17,6 +17,8 @@ pipeline {
                             }
                         }
                    }
+                                    
+
                stage('Deleting-User') {
                    steps {
                        dir('USER') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/user.git'
