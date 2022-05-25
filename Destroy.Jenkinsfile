@@ -2,23 +2,11 @@ pipeline {
     agent any
     parameters { choice(name: 'ENV', choices: ['dev', 'prod'], description: 'ENV') }
     stages {
-            stage('Deleting-Cart') {
-                steps {
-                    dir('CART') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/cart.git'
-                            sh "ls -ltr"
-                            sh "cd terraform-mutable"
-                            sh "cp env-${ENV}/Terrafile . ; terrafile"
-                            sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars"
-                            sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
-                            sh "terraform destroy -auto-approve -var-file=env-${ENV}/${ENV}.tfvars"
-                         }
-                     }
-                }
-            stage('Deleting the Components') {
+         stage('Deleting the Components') {
              parallel {
-               stage('Deleting-Cart') {
+               stage('Deleting-Frontend') {
                    steps {
-                       dir('CART') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/cart.git'
+                       dir('FRONTEND') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/frontend.git'
                                sh "ls -ltr"
                                sh "cd terraform-mutable"
                                sh "cp env-${ENV}/Terrafile . ; terrafile"
@@ -28,9 +16,68 @@ pipeline {
                             }
                         }
                    }
-
-             }
-          }
+               stage('Deleting-User') {
+                   steps {
+                       dir('USER') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/user.git'
+                               sh "ls -ltr"
+                               sh "cd terraform-mutable"
+                               sh "cp env-${ENV}/Terrafile . ; terrafile"
+                               sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars"
+                               sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
+                               sh "terraform destroy -auto-approve -var-file=env-${ENV}/${ENV}.tfvars"
+                            }
+                        }
+                   }
+               stage('Deleting-Catalogue') {
+                   steps {
+                       dir('Catalogue') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/catalogue.git'
+                               sh "ls -ltr"
+                               sh "cd terraform-mutable"
+                               sh "cp env-${ENV}/Terrafile . ; terrafile"
+                               sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars"
+                               sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
+                               sh "terraform destroy -auto-approve -var-file=env-${ENV}/${ENV}.tfvars"
+                            }
+                        }
+                  }
+            stage('Deleting-Payment') {
+                steps {
+                    dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/payment.git'
+                            sh "ls -ltr"
+                            sh "cd terraform-mutable"
+                            sh "cp env-${ENV}/Terrafile . ; terrafile"
+                            sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars"
+                            sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
+                            sh "terraform destroy -auto-approve -var-file=env-${ENV}/${ENV}.tfvars"
+                         }
+                     }
+                }
+            stage('Deleting-Cart') {
+                steps {
+                    dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/cart.git'
+                            sh "ls -ltr"
+                            sh "cd terraform-mutable"
+                            sh "cp env-${ENV}/Terrafile . ; terrafile"
+                            sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars"
+                            sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
+                            sh "terraform destroy -auto-approve -var-file=env-${ENV}/${ENV}.tfvars"
+                         }
+                     }
+                }
+            stage('Deleting-Shipping') {
+                steps {
+                    dir('SHIPPING') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/shipping.git'
+                            sh "ls -ltr"
+                            sh "cd terraform-mutable"
+                            sh "cp env-${ENV}/Terrafile . ; terrafile"
+                            sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars"
+                            sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
+                            sh "terraform destroy -auto-approve -var-file=env-${ENV}/${ENV}.tfvars"
+                         }
+                     }
+                }
+             } // Closing of parallel stage
+          }  // Deletion state completed
 
         stage('Deleting-DB') {
             steps {
