@@ -58,7 +58,7 @@ pipeline {
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
                             terraform plan -var-file=env-${ENV}/${ENV}.tfvars
-                            terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
+                            terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve || true
                           '''
                          }
                      }
@@ -72,7 +72,7 @@ pipeline {
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
                             terraform plan -var-file=env-${ENV}/${ENV}.tfvars
-                            terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
+                            terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve || true
                           '''
                          }
                      }
