@@ -12,6 +12,7 @@ pipeline {
                             cd ./terraform-mutable
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform plan -var-file=env-${ENV}/${ENV}.tfvars
                             terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
                             }
@@ -26,6 +27,7 @@ pipeline {
                             cd terraform-mutable
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform plan -var-file=env-${ENV}/${ENV}.tfvars
                             terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
                             }
@@ -38,6 +40,7 @@ pipeline {
                             cd terraform-mutable
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform plan -var-file=env-${ENV}/${ENV}.tfvars
                             terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
                             }
@@ -50,6 +53,7 @@ pipeline {
                             cd terraform-mutable
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform plan -var-file=env-${ENV}/${ENV}.tfvars
                             terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
                          }
@@ -62,6 +66,7 @@ pipeline {
                             cd terraform-mutable
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform plan -var-file=env-${ENV}/${ENV}.tfvars
                             terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
                          }
@@ -74,6 +79,7 @@ pipeline {
                             cd terraform-mutable
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform plan -var-file=env-${ENV}/${ENV}.tfvars
                             terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
                          }
@@ -97,11 +103,11 @@ pipeline {
         stage('Deleting-ALB') {
             steps {
                 dir('VPC') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/terraform-loadbalancers.git'
-                        sh "ls -ltr"
-                        sh "cp env-${ENV}/Terrafile . ; terrafile"
-                        sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars"
-                        sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
-                        sh "terraform destroy -auto-approve -var-file=env-${ENV}/${ENV}.tfvars"
+                       sh "ls -ltr"
+                       sh "cp env-${ENV}/Terrafile . ; terrafile"
+                       sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars"
+                       sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
+                       sh "terraform destroy -auto-approve -var-file=env-${ENV}/${ENV}.tfvars"
                      }
                  }
             }
