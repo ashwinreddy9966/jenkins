@@ -25,5 +25,16 @@ pipeline {
                     }
             }
         }
+        stage('Creating-ALB') {
+            steps {
+                dir('VPC') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/terraform-loadbalancers.git'
+                        sh "ls -ltr"
+                        sh "cp env-${ENV}/Terrafile . ; terrafile"
+                        sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars"
+                        sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
+                        sh "terraform apply -auto-approve -var-file=env-${ENV}/${ENV}.tfvars"
+                     }
+                 }
+            }
     }
 }
