@@ -103,7 +103,7 @@ pipeline {
                         sh '''
                                     terrafile -f  env-${ENV}/Terrafile
                                     export TF_VAR_APP_VERSION=2.0.1
-                                    terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                                    terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
                                     terraform destroy -auto-approve -var-file=env-${ENV}/${ENV}.tfvars
                         '''
                      }
@@ -116,7 +116,7 @@ pipeline {
                         sh '''
                                     terrafile -f  env-${ENV}/Terrafile
                                     export TF_VAR_APP_VERSION=2.0.1
-                                    terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                                    terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
                                     terraform destroy -auto-approve -var-file=env-${ENV}/${ENV}.tfvars
                         '''
                         }
