@@ -2,9 +2,7 @@ pipeline {
     agent any
     parameters { choice(name: 'ENV', choices: ['dev', 'prod'], description: 'ENV') }
     stages {
-         stage('Deleting the Components') {
-             parallel {
-                   stage('Deleting-Frontend') {
+                stage('Deleting-Frontend') {
                        steps {
                            dir('FRONTEND') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/frontend.git'
                               sh '''
@@ -85,8 +83,7 @@ pipeline {
                          }
                      }
                 }
-             } // Closing of parallel stage
-          }  // Deletion state completed
+
 
         stage('Deletingg-DB') {
             steps {
