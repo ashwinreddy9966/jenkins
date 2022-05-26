@@ -117,7 +117,7 @@ pipeline {
                               sh '''
                                 pwd ; ls -ltr
                                 cd ./terraform-mutable
-                                export TF_VAR_APP_VERSION=2.0.1
+                                export TF_VAR_APP_VERSION=1.0.9
                                 terrafile -f env-${ENV}/Terrafile
                                 terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
                                 terraform plan -var-file=env-${ENV}/${ENV}.tfvars
