@@ -74,7 +74,7 @@ pipeline {
                             cd terraform-mutable
                             export TF_VAR_APP_VERSION=1.0.5
                             terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
                             terraform plan -var-file=env-${ENV}/${ENV}.tfvars
                             terraform apply -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
@@ -88,7 +88,7 @@ pipeline {
                             cd terraform-mutable
                             export TF_VAR_APP_VERSION=1.0.5
                             terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
                             terraform plan -var-file=env-${ENV}/${ENV}.tfvars
                             terraform apply -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
@@ -102,7 +102,7 @@ pipeline {
                             cd terraform-mutable
                             export TF_VAR_APP_VERSION=1.0.2
                             terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
                             terraform plan -var-file=env-${ENV}/${ENV}.tfvars
                             terraform apply -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
@@ -117,7 +117,7 @@ pipeline {
                                 cd ./terraform-mutable
                                 export TF_VAR_APP_VERSION=1.0.9
                                 terrafile -f env-${ENV}/Terrafile
-                                terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                                terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
                                 terraform plan -var-file=env-${ENV}/${ENV}.tfvars
                                 terraform apply -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                               '''
