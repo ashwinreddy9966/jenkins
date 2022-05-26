@@ -39,8 +39,6 @@ pipeline {
                      }
                  }
             }
-         stage('Creating the Components') {
-             parallel {
                stage('Creating-User') {
                    steps {
                        dir('USER') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/user.git'
@@ -126,7 +124,5 @@ pipeline {
                                 }
                             }
                        }
-                 } // Closing of parallel stage
-              }  // Deletion state completed
-          }
-    }
+                  }
+            }
