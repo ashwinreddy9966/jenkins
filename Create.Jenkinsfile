@@ -83,7 +83,7 @@ pipeline {
                 }
             stage('Creating-Cart') {
                 steps {
-                    dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/cart.git'
+                    dir('CART') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/cart.git'
                           sh '''
                             cd terraform-mutable
                             export TF_VAR_APP_VERSION=1.0.5
