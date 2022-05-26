@@ -46,32 +46,32 @@ pipeline {
                             }
                         }
                   }
-            stage('Deleting-Payment') {
-                steps {
-                    dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/payment.git'
-                          sh '''
-                            cd terraform-mutable
-                            export TF_VAR_APP_VERSION=1.0.5
-                            terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
-                            terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve || true
-                          '''
-                         }
-                     }
-                }
-            stage('Deleting-Cart') {
-                steps {
-                    dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/cart.git'
-                          sh '''
-                            cd terraform-mutable
-                            export TF_VAR_APP_VERSION=1.0.5
-                            terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
-                            terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve || true
-                          '''
-                         }
-                     }
-                }
+//             stage('Deleting-Payment') {
+//                 steps {
+//                     dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/payment.git'
+//                           sh '''
+//                             cd terraform-mutable
+//                             export TF_VAR_APP_VERSION=1.0.5
+//                             terrafile -f env-${ENV}/Terrafile
+//                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+//                             terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve || true
+//                           '''
+//                          }
+//                      }
+//                 }
+//             stage('Deleting-Cart') {
+//                 steps {
+//                     dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/cart.git'
+//                           sh '''
+//                             cd terraform-mutable
+//                             export TF_VAR_APP_VERSION=1.0.5
+//                             terrafile -f env-${ENV}/Terrafile
+//                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+//                             terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve || true
+//                           '''
+//                          }
+//                      }
+//                 }
             stage('Deleting-Shipping') {
                 steps {
                     dir('SHIPPING') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/shipping.git'
