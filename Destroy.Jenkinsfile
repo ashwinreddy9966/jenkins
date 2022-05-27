@@ -97,13 +97,13 @@ pipeline {
                  }
             }
 
-        stage('Deletingg-ALB') {
+        stage('Deleting-ALB') {
             steps {
                 dir('VPC') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/terraform-loadbalancers.git'
                         sh '''
                                     terrafile -f  env-${ENV}/Terrafile
                                     export TF_VAR_APP_VERSION=2.0.1
-                                    terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
+                                    terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
                                     terraform destroy -auto-approve -var-file=env-${ENV}/${ENV}.tfvars
                         '''
                      }
@@ -116,7 +116,7 @@ pipeline {
                         sh '''
                                     terrafile -f  env-${ENV}/Terrafile
                                     export TF_VAR_APP_VERSION=2.0.1
-                                    terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
+                                    terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
                                     terraform destroy -auto-approve -var-file=env-${ENV}/${ENV}.tfvars
                         '''
                         }
