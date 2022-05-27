@@ -17,7 +17,7 @@ pipeline {
                      }
                  }
             }
-     stage('Backend') {
+     stage('DB-n-ALB') {
         parallel {
         stage('Creating-DB') {
             steps {
@@ -30,7 +30,7 @@ pipeline {
                        sh "terraform apply -auto-approve -var-file=env-${ENV}/${ENV}.tfvars || true"
                        sh "terraform apply -auto-approve -var-file=env-${ENV}/${ENV}.tfvars"
                     }
-            }
+               }
         }
         stage('Creating-ALB') {
             steps {
@@ -43,6 +43,9 @@ pipeline {
                      }
                  }
             }
+        }   // Closure of parallel stages
+    }   // parallel completed
+
          stage('Backend') {
             parallel {
                stage('Creating-User') {
