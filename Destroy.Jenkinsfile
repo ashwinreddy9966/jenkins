@@ -2,7 +2,7 @@ pipeline {
     agent any
     parameters { choice(name: 'ENV', choices: ['dev', 'prod'], description: 'ENV') }
     stages {
-         stage('Deleting Backend') {
+         stage('Deleting Frontend User Catalogue') {
             parallel {
                stage('Deleting-Frontend') {
                        steps {
@@ -47,6 +47,10 @@ pipeline {
                             }
                         }
                   }
+                }
+             }
+         stage('Deleting Payment Cart Shipping') {
+            parallel {
             stage('Deleting-Payment') {
                 steps {
                     dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/payment.git'
