@@ -23,7 +23,7 @@ pipeline {
                        dir('USER') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/user.git'
                           sh '''
                             cd terraform-mutable
-                            export TF_VAR_APP_VERSION=1.0.1
+                            export TF_VAR_APP_VERSION=2.0.0
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
                             terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
@@ -36,7 +36,7 @@ pipeline {
                        dir('Catalogue') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/catalogue.git'
                           sh '''
                             cd terraform-mutable
-                            export TF_VAR_APP_VERSION=1.1.2
+                            export TF_VAR_APP_VERSION=2.0.0
                             terrafile -f env-${ENV}/Terrafile
                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
                             terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
@@ -44,32 +44,32 @@ pipeline {
                             }
                         }
                   }
-//             stage('Deleting-Payment') {
-//                 steps {
-//                     dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/payment.git'
-//                           sh '''
-//                             cd terraform-mutable
-//                             export TF_VAR_APP_VERSION=1.0.5
-//                             terrafile -f env-${ENV}/Terrafile
-//                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
-//                             terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve || true
-//                           '''
-//                          }
-//                      }
-//                 }
-//             stage('Deleting-Cart') {
-//                 steps {
-//                     dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/cart.git'
-//                           sh '''
-//                             cd terraform-mutable
-//                             export TF_VAR_APP_VERSION=1.0.5
-//                             terrafile -f env-${ENV}/Terrafile
-//                             terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
-//                             terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve || true
-//                           '''
-//                          }
-//                      }
-//                 }
+            stage('Deleting-Payment') {
+                steps {
+                    dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/payment.git'
+                          sh '''
+                            cd terraform-mutable
+                            export TF_VAR_APP_VERSION=1.0.5
+                            terrafile -f env-${ENV}/Terrafile
+                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve || true
+                          '''
+                         }
+                     }
+                }
+            stage('Deleting-Cart') {
+                steps {
+                    dir('PAYMENT') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/cart.git'
+                          sh '''
+                            cd terraform-mutable
+                            export TF_VAR_APP_VERSION=1.0.5
+                            terrafile -f env-${ENV}/Terrafile
+                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve || true
+                          '''
+                         }
+                     }
+                }
             stage('Deleting-Shipping') {
                 steps {
                     dir('SHIPPING') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/shipping.git'
