@@ -17,7 +17,8 @@ pipeline {
                      }
                  }
             }
-
+     stage('Backend') {
+        parallel {
         stage('Creating-DB') {
             steps {
             dir('EC2') { git branch: 'main', url:'https://github.com/ashwinreddy9966/terraform-databases.git'
