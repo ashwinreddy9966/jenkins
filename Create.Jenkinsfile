@@ -42,6 +42,8 @@ pipeline {
                      }
                  }
             }
+         stage('Backend') {
+            parallel {
                stage('Creating-User') {
                    steps {
                        dir('USER') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/user.git'
@@ -112,6 +114,8 @@ pipeline {
                          }
                      }
                 }
+              } // Parallel Stages Completed
+           }   // Stage Completed
                    stage('Creating-Frontend') {
                        steps {
                            dir('FRONTEND') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/frontend.git'
