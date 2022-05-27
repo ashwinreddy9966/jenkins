@@ -2,6 +2,8 @@ pipeline {
     agent any
     parameters { choice(name: 'ENV', choices: ['dev', 'prod'], description: 'ENV') }
     stages {
+         stage('Deleting Backend') {
+            parallel {
                stage('Deleting-Frontend') {
                        steps {
                            dir('FRONTEND') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/frontend.git'
@@ -84,6 +86,8 @@ pipeline {
                          }
                      }
                 }
+             }
+         }
      stage('DB-n-ALB') {
         parallel {
         stage('Deletingg-DB') {
