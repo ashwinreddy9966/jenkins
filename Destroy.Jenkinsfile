@@ -64,7 +64,7 @@ pipeline {
                             cd terraform-mutable
                             export TF_VAR_APP_VERSION=1.0.5
                             terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
                             terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve || true
                           '''
                          }
@@ -77,7 +77,7 @@ pipeline {
                             cd terraform-mutable
                             export TF_VAR_APP_VERSION=1.0.5
                             terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
                             terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve || true
                           '''
                          }
@@ -90,7 +90,7 @@ pipeline {
                             cd terraform-mutable
                             export TF_VAR_APP_VERSION=1.0.2
                             terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
+                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure
                             terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
                           '''
                          }
