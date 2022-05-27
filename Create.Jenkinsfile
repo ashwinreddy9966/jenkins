@@ -17,8 +17,8 @@ pipeline {
                      }
                  }
             }
-     stage('DB-n-ALB') {
-        parallel {
+//      stage('DB-n-ALB') {
+//         parallel {
         stage('Creating-DB') {
             steps {
             dir('EC2') { git branch: 'main', url:'https://github.com/ashwinreddy9966/terraform-databases.git'
@@ -43,12 +43,12 @@ pipeline {
                      }
                  }
             }
-        }   // Closure of parallel stages
-    }   // parallel completed
+//         }   // Closure of parallel stages
+//     }   // parallel completed
 
          stage('Backend') {
-            parallel {
-               stage('Creating-User') {
+//             parallel {
+//                stage('Creating-User') {
                    steps {
                        dir('USER') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/user.git'
                           sh '''
@@ -118,8 +118,8 @@ pipeline {
                          }
                      }
                 }
-              } // Parallel Stages Completed
-           }   // Stage Completed
+//               } // Parallel Stages Completed
+//            }   // Stage Completed
                    stage('Creating-Frontend') {
                        steps {
                            dir('FRONTEND') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/frontend.git'
