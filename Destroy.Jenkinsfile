@@ -96,8 +96,8 @@ pipeline {
                          }
                      }
                 }
-
-
+     stage('DB-n-ALB') {
+        parallel {
         stage('Deletingg-DB') {
             steps {
                 dir('VPC') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/terraform-databases.git'
@@ -122,6 +122,8 @@ pipeline {
                      }
                  }
             }
+         }
+      }
 
         stage('Deleting-VPC') {
             steps {
