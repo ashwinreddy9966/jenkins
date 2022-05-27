@@ -31,19 +31,7 @@ pipeline {
                             }
                         }
                    }
-               stage('Deleting-Cart') {
-                   steps {
-                       dir('CART') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/cart.git'
-                          sh '''
-                            cd terraform-mutable
-                            export TF_VAR_APP_VERSION=2.0.0
-                            terrafile -f env-${ENV}/Terrafile
-                            terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
-                            terraform destroy -var-file=env-${ENV}/${ENV}.tfvars -auto-approve
-                          '''
-                            }
-                        }
-                   }
+
                stage('Deleting-Catalogue') {
                    steps {
                        dir('Catalogue') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/catalogue.git'
