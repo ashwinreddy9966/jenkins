@@ -2,7 +2,7 @@ pipeline {
     agent any
     parameters
          { choice(name: 'ENV', choices: ['dev', 'prod'], description: 'ENV')
-                 string(choices: 'APP_VERSION',description: 'Choose App Version To Deploy : Ignore this VPC and DB', name: "APP_VERSION")
+            string(choices: 'APP_VERSION',description: 'Choose App Version To Deploy : Ignore this VPC and DB', name: "APP_VERSION")
           }
     stages {
         stage('Creating-VPC') {
