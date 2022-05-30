@@ -101,6 +101,7 @@ pipeline {
                         sh "export TF_VAR_APP_VERSION=2.0.1"
                         sh "cp env-${ENV}/Terrafile . ; terrafile"
                         sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure"
+                        sh "terraform destroy -var-file=env-prod/prod.tfvars -auto-approve || true"
                         sh "terraform destroy -auto-approve -var-file=env-${ENV}/${ENV}.tfvars"
                      }
                  }
