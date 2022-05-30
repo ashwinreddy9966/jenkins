@@ -94,7 +94,7 @@ pipeline {
          }
      stage('DB-n-ALB') {
         parallel {
-        stage('Deletingg-DB') {
+        stage('Deleting-DB') {
             steps {
                 dir('VPC') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/terraform-databases.git'
                         sh "ls -ltr"
