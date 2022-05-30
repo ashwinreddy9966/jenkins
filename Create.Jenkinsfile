@@ -90,6 +90,10 @@ pipeline {
                          }
                      }
                 }
+             } // Parallel Stages Completed
+          }   // Stage Completed
+         stage('Backend-2') {
+            parallel {
             stage('Creating-Cart') {
                 steps {
                     dir('CART') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/cart.git'
