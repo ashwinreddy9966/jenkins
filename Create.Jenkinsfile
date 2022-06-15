@@ -13,7 +13,7 @@ pipeline {
                         sh "cp env-${ENV}/Terrafile . ; terrafile"
                         sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure"
                         sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
-                        sh "terraform apply -auto-approve -var-file=env-${ENV}/${ENV}.tfvars"
+                        sh "terraform destroy -auto-approve -var-file=env-${ENV}/${ENV}.tfvars && exit"
                      }
                  }
             }
