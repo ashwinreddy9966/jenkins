@@ -48,8 +48,8 @@ pipeline {
           parallel {
             stage('CART') {
                steps {
-                dir('CART') {
-                    git branch: 'main', url:'https://github.com/ashwinreddy9966/cart.git'
+                dir('CART') { git branch: 'main', url:'https://github.com/ashwinreddy9966/cart.git' }
+                dir('CHART') { git branch: 'main', url:'https://github.com/ashwinreddy9966/roboshop-helm-chart.git'
                        sh "ls -ltr"
                        }
                     }
