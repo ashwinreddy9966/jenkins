@@ -20,7 +20,7 @@ pipeline {
                  }
             }
         stage('Creating-DB') {
-            dir('EC2') { git branch: 'main', url:'https://github.com/ashwinreddy9966/terraform-databases.git'
+            dir('DB') { git branch: 'main', url:'https://github.com/ashwinreddy9966/terraform-databases.git'
             steps {
                        sh "ls -ltr"
                        sh "export TF_VAR_APP_VERSION=2.0.1"
