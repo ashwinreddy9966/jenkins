@@ -1,89 +1,130 @@
 pipeline {
-    agent any
-    parameters
-         { choice(name: 'ENV', choices: ['dev', 'prod'], description: 'ENV')
-            string(name: 'APP_VERSION', defaultValue: '', description: 'Choose App Version To Deploy : Ignore this VPC and DB')
-          }
-    options { timeout(time: 30, unit: 'MINUTES')  }
+  agent any
 
-    stages {
-        stage('Creating-VPC') {
-            steps {
-                dir('VPC') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/terraform-vpc.git'
-                        sh "ls -ltr"
-                        sh "export TF_VAR_APP_VERSION=2.0.1"
-                        sh "cp env-${ENV}/Terrafile . ; terrafile"
-                        sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure"
-                        sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
-                        sh "terraform apply -auto-approve -var-file=env-${ENV}/${ENV}.tfvars"
-                     }
-                 }
-            }
-        stage('Creating-DB') {
-            dir('DB') { git branch: 'main', url:'https://github.com/ashwinreddy9966/terraform-databases.git'
-            steps {
-                       sh "ls -ltr"
-                       sh "export TF_VAR_APP_VERSION=2.0.1"
-                       sh "cp env-${ENV}/Terrafile . ; terrafile"
-                       sh "terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars -reconfigure"
-                       sh "terraform plan -var-file=env-${ENV}/${ENV}.tfvars"
-                       sh "terraform apply -auto-approve -var-file=env-${ENV}/${ENV}.tfvars || true"
-                       sh "terraform apply -auto-approve -var-file=env-${ENV}/${ENV}.tfvars"
-                    }
-               }
-          }
+  stages {
 
-        stage('Creating-EKS') {
-                dir('EKS') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/kubernetes.git'
-                steps {
-                        sh '''
-                           cd eks
-                           make create
-                           aws eks update-kubeconfig --name prod-eks-cluster
-                         '''
-                                 }
-                             }
-                        }
-                        
-          stage('CART') {
-               steps {
-                dir('CART') { git branch: 'main', url:'https://github.com/ashwinreddy9966/cart.git' }
-                dir('CHART') { git branch: 'main', url:'https://github.com/ashwinreddy9966/roboshop-helm-chart.git'
-                       sh "ls -ltr"
-                       }
-                    }
-                }
-             stage('CATALOGUE') {
-             steps {
-                 dir('CATALOGUE') {
-                     git branch: 'main', url:'https://github.com/ashwinreddy9966/catalogue.git'
-                        sh "ls -ltr"
-                        }
-                     }
-                 }
-             stage('USER') {
-             steps {
-                 dir('USER') {
-                     git branch: 'main', url:'https://github.com/ashwinreddy9966/cart.git'
-                        sh "ls -ltr"
-                        }
-                     }
-                 }
-              stage('SHIPPING') {
-              steps {
-                  dir('SHIPPING') {
-                      git branch: 'main', url:'https://github.com/ashwinreddy9966/shipping.git'
-                         sh "ls -ltr"
-                         }
-                      }
-                  }
-               stage('PAYMENT') {
-               steps {
-                   dir('PAYMENT') {
-                       git branch: 'main', url:'https://github.com/ashwinreddy9966/payment.git'
-                          sh "ls -ltr"
-                           }
-                       }
-                   }
-                }
+    stage('VPC') {
+      steps {
+        dir('VPC') {
+          git branch: 'main', url: 'https://github.com/ashwinreddy9966/terraform-vpc.git'
+          sh '''
+            terrafile -f env-prod/Terrafile
+            terraform init -backend-config=env-prod/prod-backend.tfvars
+            terraform apply -var-file=env-prod/prod.tfvars -auto-approve
+          '''
+        }
+      }
+    }
+
+    stage('DB') {
+      steps {
+        dir('DB') {
+          git branch: 'main', url: 'https://github.com/ashwinreddy9966/terraform-databases.git'
+          sh '''
+            terrafile -f env-prod/Terrafile
+            terraform init -backend-config=env-prod/prod-backend.tfvars
+            terraform apply -var-file=env-prod/prod.tfvars -auto-approve || true
+            terraform apply -var-file=env-prod/prod.tfvars -auto-approve
+          '''
+        }
+      }
+    }
+
+    stage('EKS') {
+      steps {
+        dir('EKS') {
+          git branch: 'main', url: 'https://github.com/ashwinreddy9966/kubernetes.git'
+          sh '''
+            cd eks
+            make create
+            aws eks update-kubeconfig --name prod-eks-cluster
+          '''
+        }
+      }
+    }
+
+    stage('Backend') {
+      parallel {
+
+        stage('CART') {
+          steps {
+            dir('CHART') {
+              git branch: 'main', url: 'https://github.com/ashwinreddy9966/roboshop-helm-chart.git'
             }
+            dir('CART') {
+              git branch: 'main', url: 'https://github.com/ashwinreddy9966/cart.git'
+              sh '''
+                  helm upgrade -i -f values.yaml cart ../CHART
+                '''
+            }
+          }
+        }
+
+        stage('CATALOGUE') {
+          steps {
+            dir('CATALOGUE') {
+              git branch: 'main', url: 'https://github.com/ashwinreddy9966/catalogue.git'
+              sh '''
+                helm upgrade -i -f values.yaml catalogue ../CHART
+          '''
+            }
+          }
+        }
+
+        stage('USER') {
+          steps {
+            dir('USER') {
+              git branch: 'main', url: 'https://github.com/ashwinreddy9966/user.git'
+              sh '''
+                helm upgrade -i -f values.yaml user ../CHART
+          '''
+            }
+          }
+        }
+
+        stage('PAYMENT') {
+          steps {
+            dir('PAYMENT') {
+              git branch: 'main', url: 'https://github.com/ashwinreddy9966/payment.git'
+              sh '''
+              helm upgrade -i -f values.yaml payment ../CHART
+          '''
+            }
+          }
+        }
+
+        stage('SHIPPING') {
+          steps {
+            dir('SHIPPING') {
+              git branch: 'main', url: 'https://github.com/ashwinreddy9966/shipping.git'
+              sh '''
+                helm upgrade -i -f values.yaml shipping ../CHART
+          '''
+            }
+          }
+        }
+
+        stage('FRONTEND') {
+          steps {
+            dir('FRONTEND') {
+              git branch: 'main', url: 'https://github.com/ashwinreddy9966/frontend.git'
+              sh '''
+                helm upgrade -i -f values.yaml frontend ../CHART
+          '''
+            }
+          }
+        }
+
+      }
+    }
+
+
+  }
+
+  post {
+    always {
+      cleanWs()
+    }
+  }
+
+}
