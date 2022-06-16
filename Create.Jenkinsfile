@@ -47,8 +47,8 @@ pipeline {
         stage('Backend') {
           parallel {
             stage('CART') {
+               steps {
                 dir('CART') {
-                steps {
                     git branch: 'main', url:'https://github.com/ashwinreddy9966/cart.git'
                     git branch: 'main', url:'https://github.com/ashwinreddy9966/roboshop-helm-chart.git'
                        sh "ls -ltr"
@@ -56,32 +56,32 @@ pipeline {
                     }
                 }
              stage('CATALOGUE') {
+             steps {
                  dir('CATALOGUE') {
-                  steps {
                      git branch: 'main', url:'https://github.com/ashwinreddy9966/catalogue.git'
                         sh "ls -ltr"
                         }
                      }
                  }
              stage('USER') {
+             steps {
                  dir('USER') {
-                     steps {
                      git branch: 'main', url:'https://github.com/ashwinreddy9966/cart.git'
                         sh "ls -ltr"
                         }
                      }
                  }
               stage('SHIPPING') {
+              steps {
                   dir('SHIPPING') {
-                   steps {
                       git branch: 'main', url:'https://github.com/ashwinreddy9966/shipping.git'
                          sh "ls -ltr"
                          }
                       }
                   }
                stage('PAYMENT') {
+               steps {
                    dir('PAYMENT') {
-                    steps {
                        git branch: 'main', url:'https://github.com/ashwinreddy9966/payment.git'
                           sh "ls -ltr"
                            }
