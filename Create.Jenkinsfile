@@ -44,9 +44,8 @@ pipeline {
                                  }
                              }
                         }
-        stage('Backend') {
-          parallel {
-            stage('CART') {
+                        
+          stage('CART') {
                steps {
                 dir('CART') { git branch: 'main', url:'https://github.com/ashwinreddy9966/cart.git' }
                 dir('CHART') { git branch: 'main', url:'https://github.com/ashwinreddy9966/roboshop-helm-chart.git'
@@ -86,7 +85,5 @@ pipeline {
                            }
                        }
                    }
-                } //end of parallel
-            }  // end of backend
-        }
-    }
+                }
+            }
