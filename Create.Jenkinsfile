@@ -46,7 +46,7 @@ pipeline {
                         }
         stage('Backend') {
             parallel {
-            
+            stage()
 
             }
         }
