@@ -23,7 +23,7 @@ pipeline {
           sh '''
             cd eks
             make destroy
-           
+
           '''
         }
       }
