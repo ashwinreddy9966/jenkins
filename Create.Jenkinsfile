@@ -47,14 +47,19 @@ pipeline {
         stage('Backend') {
             parallel {
             stage('CART') {
-                dir('EC2') {
+                dir('CART') {
                     git branch: 'main', url:'https://github.com/ashwinreddy9966/cart.git'
                     git branch: 'main', url:'https://github.com/ashwinreddy9966/roboshop-helm-chart.git'
                        sh "ls -ltr"
-
                     }
-
                 }
+             stage('CATALOGUE') {
+                 dir('CATALOGUE') {
+                     git branch: 'main', url:'https://github.com/ashwinreddy9966/cart.git'
+                     git branch: 'main', url:'https://github.com/ashwinreddy9966/roboshop-helm-chart.git'
+                        sh "ls -ltr"
+                     }
+                 }
 
             }
         }
