@@ -1,32 +1,32 @@
 pipeline {
   agent any
   stages {
-    stage('VPC') {
-      steps {
-        dir('VPC') {
-          git branch: 'main', url: 'https://github.com/ashwinreddy9966/terraform-vpc.git'
-          sh '''
-            terrafile -f env-prod/Terrafile
-            terraform init -backend-config=env-prod/prod-backend.tfvars
-            terraform apply -var-file=env-prod/prod.tfvars -auto-approve
-          '''
-        }
-      }
-    }
-
-    stage('DB') {
-      steps {
-        dir('DB') {
-          git branch: 'main', url: 'https://github.com/ashwinreddy9966/terraform-databases.git'
-          sh '''
-            terrafile -f env-prod/Terrafile
-            terraform init -backend-config=env-prod/prod-backend.tfvars
-            terraform apply -var-file=env-prod/prod.tfvars -auto-approve || true
-            terraform apply -var-file=env-prod/prod.tfvars -auto-approve
-          '''
-        }
-      }
-    }
+//     stage('VPC') {
+//       steps {
+//         dir('VPC') {
+//           git branch: 'main', url: 'https://github.com/ashwinreddy9966/terraform-vpc.git'
+//           sh '''
+//             terrafile -f env-prod/Terrafile
+//             terraform init -backend-config=env-prod/prod-backend.tfvars
+//             terraform apply -var-file=env-prod/prod.tfvars -auto-approve
+//           '''
+//         }
+//       }
+//     }
+//
+//     stage('DB') {
+//       steps {
+//         dir('DB') {
+//           git branch: 'main', url: 'https://github.com/ashwinreddy9966/terraform-databases.git'
+//           sh '''
+//             terrafile -f env-prod/Terrafile
+//             terraform init -backend-config=env-prod/prod-backend.tfvars
+//             terraform apply -var-file=env-prod/prod.tfvars -auto-approve || true
+//             terraform apply -var-file=env-prod/prod.tfvars -auto-approve
+//           '''
+//         }
+//       }
+//     }
 
     stage('EKS') {
       steps {
