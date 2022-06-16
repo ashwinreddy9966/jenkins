@@ -52,7 +52,7 @@ pipeline {
             dir('CART') {
               git branch: 'main', url: 'https://github.com/ashwinreddy9966/cart.git'
               sh '''
-                  helm upgrade -i -f values.yaml cart ../CHART
+                  ls -ltr
                 '''
             }
           }
@@ -63,7 +63,7 @@ pipeline {
             dir('CATALOGUE') {
               git branch: 'main', url: 'https://github.com/ashwinreddy9966/catalogue.git'
               sh '''
-                helm upgrade -i -f values.yaml catalogue ../CHART
+                 ls -ltr
           '''
             }
           }
@@ -74,7 +74,7 @@ pipeline {
             dir('USER') {
               git branch: 'main', url: 'https://github.com/ashwinreddy9966/user.git'
               sh '''
-                helm upgrade -i -f values.yaml user ../CHART
+                ls -ltr
           '''
             }
           }
@@ -85,7 +85,7 @@ pipeline {
             dir('PAYMENT') {
               git branch: 'main', url: 'https://github.com/ashwinreddy9966/payment.git'
               sh '''
-              helm upgrade -i -f values.yaml payment ../CHART
+               ls -ltr
           '''
             }
           }
@@ -96,7 +96,7 @@ pipeline {
             dir('SHIPPING') {
               git branch: 'main', url: 'https://github.com/ashwinreddy9966/shipping.git'
               sh '''
-                helm upgrade -i -f values.yaml shipping ../CHART
+                ls -ltr
           '''
             }
           }
@@ -107,7 +107,8 @@ pipeline {
             dir('FRONTEND') {
               git branch: 'main', url: 'https://github.com/ashwinreddy9966/frontend.git'
               sh '''
-                helm upgrade -i -f values.yaml frontend ../CHART
+                 ls -ltr
+                 helm list
           '''
             }
           }
