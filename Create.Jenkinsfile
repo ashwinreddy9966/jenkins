@@ -50,7 +50,6 @@ pipeline {
                steps {
                 dir('CART') {
                     git branch: 'main', url:'https://github.com/ashwinreddy9966/cart.git'
-                    git branch: 'main', url:'https://github.com/ashwinreddy9966/roboshop-helm-chart.git'
                        sh "ls -ltr"
                        }
                     }
