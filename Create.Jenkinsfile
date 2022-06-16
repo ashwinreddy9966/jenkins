@@ -4,6 +4,8 @@ pipeline {
          { choice(name: 'ENV', choices: ['dev', 'prod'], description: 'ENV')
             string(name: 'APP_VERSION', defaultValue: '', description: 'Choose App Version To Deploy : Ignore this VPC and DB')
           }
+    options { timeout(time: 30, unit: 'MINUTES')  }
+
     stages {
         stage('Creating-VPC') {
             steps {
