@@ -86,7 +86,7 @@ pipeline {
                           sh "ls -ltr"
                            }
                        }
-                   }                             
+                   }
                 } //end of parallel
             }  // end of backend
         }
