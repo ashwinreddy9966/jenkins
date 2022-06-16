@@ -46,7 +46,14 @@ pipeline {
                         }
         stage('Backend') {
             parallel {
-            stage()
+            stage('CART') {
+                dir('EC2') {
+                    git branch: 'main', url:'https://github.com/ashwinreddy9966/cart.git'
+
+
+                    }
+
+                }
 
             }
         }
