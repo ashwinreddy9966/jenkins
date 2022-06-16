@@ -31,7 +31,7 @@ pipeline {
                        sh "terraform apply -auto-approve -var-file=env-${ENV}/${ENV}.tfvars"
                     }
                }
-        }
+          }
 
         stage('Creating-EKS') {
                 dir('EKS') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/kubernetes.git'
@@ -45,7 +45,7 @@ pipeline {
                              }
                         }
         stage('Backend') {
-            parallel {
+          parallel {
             stage('CART') {
                 dir('CART') {
                 steps {
