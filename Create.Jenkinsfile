@@ -77,6 +77,7 @@ pipeline {
               git branch: 'main', url: 'https://github.com/ashwinreddy9966/user.git'
               sh '''
                 ls -ltr
+                  helm upgrade -i -f values.yaml user ../CHART
           '''
             }
           }
@@ -88,6 +89,7 @@ pipeline {
               git branch: 'main', url: 'https://github.com/ashwinreddy9966/payment.git'
               sh '''
                ls -ltr
+                  helm upgrade -i -f values.yaml payment ../CHART
           '''
             }
           }
@@ -99,6 +101,7 @@ pipeline {
               git branch: 'main', url: 'https://github.com/ashwinreddy9966/shipping.git'
               sh '''
                 ls -ltr
+                  helm upgrade -i -f values.yaml shipping ../CHART
           '''
             }
           }
@@ -110,7 +113,7 @@ pipeline {
               git branch: 'main', url: 'https://github.com/ashwinreddy9966/frontend.git'
               sh '''
                  ls -ltr
-                 helm list
+                  helm upgrade -i -f values.yaml frontend ../CHART
           '''
             }
           }
