@@ -20,8 +20,8 @@ pipeline {
                  }
             }
         stage('Creating-DB') {
-            steps {
             dir('EC2') { git branch: 'main', url:'https://github.com/ashwinreddy9966/terraform-databases.git'
+            steps {
                        sh "ls -ltr"
                        sh "export TF_VAR_APP_VERSION=2.0.1"
                        sh "cp env-${ENV}/Terrafile . ; terrafile"
@@ -34,8 +34,8 @@ pipeline {
         }
 
         stage('Creating-EKS') {
-            steps {
                 dir('EKS') {  git branch: 'main', url: 'https://github.com/ashwinreddy9966/kubernetes.git'
+                steps {
                         sh '''
                            cd eks
                            make create
@@ -48,33 +48,43 @@ pipeline {
             parallel {
             stage('CART') {
                 dir('CART') {
+                steps {
                     git branch: 'main', url:'https://github.com/ashwinreddy9966/cart.git'
                     git branch: 'main', url:'https://github.com/ashwinreddy9966/roboshop-helm-chart.git'
                        sh "ls -ltr"
+                       }
                     }
                 }
              stage('CATALOGUE') {
                  dir('CATALOGUE') {
+                  steps {
                      git branch: 'main', url:'https://github.com/ashwinreddy9966/catalogue.git'
                         sh "ls -ltr"
+                        }
                      }
                  }
              stage('USER') {
                  dir('USER') {
+                     steps {
                      git branch: 'main', url:'https://github.com/ashwinreddy9966/cart.git'
                         sh "ls -ltr"
+                        }
                      }
                  }
               stage('SHIPPING') {
                   dir('SHIPPING') {
+                   steps {
                       git branch: 'main', url:'https://github.com/ashwinreddy9966/shipping.git'
                          sh "ls -ltr"
+                         }
                       }
                   }
                stage('PAYMENT') {
                    dir('PAYMENT') {
+                    steps {
                        git branch: 'main', url:'https://github.com/ashwinreddy9966/payment.git'
                           sh "ls -ltr"
+                           }
                        }
                    }                             
                 } //end of parallel
