@@ -65,7 +65,7 @@ pipeline {
               git branch: 'main', url: 'https://github.com/ashwinreddy9966/catalogue.git'
               sh '''
                  ls -ltr
-                  helm upgrade -i -f values.yaml cart ../CHART
+                 helm upgrade -i -f values.yaml catalogue ../CHART
           '''
             }
           }
